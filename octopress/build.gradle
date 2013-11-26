@@ -15,27 +15,20 @@ clean.doLast { ant.delete(dir: ".cache"); ant.delete(dir: "target") }
 
 buildscript {
     project.ext {
-        grainHome = System.getenv('GRAIN_HOME')
-
-        if (!grainHome) {
-            throw new RuntimeException('Please set GRAIN_HOME environment variable')
-        }
-
         grainProps = new Properties()
-        grainProps.load(new FileInputStream("$grainHome/build.properties"))
-        grainVersion = grainProps.getProperty('grain.version')?.toString()
+        grainProps.load(new FileInputStream("$project.projectDir/application.properties"))
+        grainVersion = grainProps.getProperty('grain.version')
 
         if (!project.grainVersion) {
-            throw new RuntimeException('GRAIN_HOME is set to an invalid directory')
+            throw new RuntimeException('Grain version is not set in properties file')
         }
     }
 }
 
 repositories {
     mavenCentral()
-    ivy {
-        name 'local-grain-repo'
-        artifactPattern "file:///$project.grainHome/ivy/[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+    maven {
+        url 'http://sysgears.github.io/grain/repo/'
     }
 }
 
@@ -43,10 +36,6 @@ dependencies {
     compile "com.sysgears.grain:grain:$project.grainVersion"
 
     compile 'org.codehaus.groovy:groovy:2.1.2'
-}
-
-project.ext {
-    grainJar = project.configurations.compile.find { it.name.startsWith("grain-") }
 }
 
 sourceSets {
@@ -57,19 +46,27 @@ sourceSets {
     }
 }
 
-task(preview) << {
-    println "Launching ${project.grainJar} preview"
-    javaexec { main = "-jar"; args "${project.grainJar}", "preview" }
+project.ext {
+    mainClass = 'com.example.grain.Launcher'
+    classpath = sourceSets.main.runtimeClasspath
 }
 
-task(generate) << {
-    println "Launching ${project.grainJar} generate"
-    javaexec { main = "-jar"; args "${project.grainJar}", "generate" }
+task preview (type: JavaExec, dependsOn: classes) {
+    args = ['preview']
+    main = project.mainClass
+    classpath = project.classpath
 }
 
-task(deploy) << {
-    println "Launching ${project.grainJar} deploy"
-    javaexec { main = "-jar"; args "${project.grainJar}", "deploy" }
+task generate (type: JavaExec, dependsOn: classes) {
+    args = ['generate']
+    main = project.mainClass
+    classpath = project.classpath
+}
+
+task deploy (type: JavaExec, dependsOn: classes) {
+    args = ['deploy']
+    main = project.mainClass
+    classpath = project.classpath
 }
 
 task wrapper(type: Wrapper) {
