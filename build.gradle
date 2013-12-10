@@ -51,20 +51,31 @@ project.ext {
     classpath = sourceSets.main.runtimeClasspath
 }
 
+def getGrainArgs(project) {
+    project.hasProperty('args') && project.args.trim() ?
+        project.args.split(',').toList() : []
+}
+
+task grain (type: JavaExec, dependsOn: classes) {
+    args = getGrainArgs(project)
+    main = project.mainClass
+    classpath = project.classpath
+}
+
 task preview (type: JavaExec, dependsOn: classes) {
-    args = ['preview']
+    args = ['preview'] + getGrainArgs(project)
     main = project.mainClass
     classpath = project.classpath
 }
 
 task generate (type: JavaExec, dependsOn: classes) {
-    args = ['generate']
+    args = ['generate'] + getGrainArgs(project)
     main = project.mainClass
     classpath = project.classpath
 }
 
 task deploy (type: JavaExec, dependsOn: classes) {
-    args = ['deploy']
+    args = ['deploy'] + getGrainArgs(project)
     main = project.mainClass
     classpath = project.classpath
 }
