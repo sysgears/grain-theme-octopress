@@ -4,7 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 version = '1.0'
-defaultTasks 'preview'
+defaultTasks 'grain'
 
 def compatibilityVersion = 1.5
 sourceCompatibility = compatibilityVersion
@@ -58,24 +58,6 @@ def getGrainArgs(project) {
 
 task grain (type: JavaExec, dependsOn: classes) {
     args = getGrainArgs(project)
-    main = project.mainClass
-    classpath = project.classpath
-}
-
-task preview (type: JavaExec, dependsOn: classes) {
-    args = ['preview'] + getGrainArgs(project)
-    main = project.mainClass
-    classpath = project.classpath
-}
-
-task generate (type: JavaExec, dependsOn: classes) {
-    args = ['generate'] + getGrainArgs(project)
-    main = project.mainClass
-    classpath = project.classpath
-}
-
-task deploy (type: JavaExec, dependsOn: classes) {
-    args = ['deploy'] + getGrainArgs(project)
     main = project.mainClass
     classpath = project.classpath
 }
