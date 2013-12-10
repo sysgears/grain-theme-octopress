@@ -56,7 +56,7 @@ def getGrainArgs(project) {
         project.args.split(',').toList() : []
 }
 
-task grain (type: JavaExec, dependsOn: classes) {
+task grain(type: JavaExec, dependsOn: classes) {
     args = getGrainArgs(project)
     main = project.mainClass
     classpath = project.classpath
