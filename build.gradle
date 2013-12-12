@@ -56,10 +56,12 @@ def getGrainArgs(project) {
         project.args.split(',').toList() : []
 }
 
-task grain(type: JavaExec, dependsOn: classes) {
-    args = getGrainArgs(project)
-    main = project.mainClass
-    classpath = project.classpath
+task grain() {
+    project.javaexec {
+            classpath = project.classpath
+            main = project.mainClass
+            args = getGrainArgs(project)
+    }
 }
 
 task wrapper(type: Wrapper) {
