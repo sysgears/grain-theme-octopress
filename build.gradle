@@ -9,7 +9,6 @@ defaultTasks 'grain'
 def compatibilityVersion = 1.5
 sourceCompatibility = compatibilityVersion
 targetCompatibility = compatibilityVersion
-mainClassName = 'com.example.grain.Launcher'
 
 clean.doLast { ant.delete(dir: ".cache"); ant.delete(dir: "target") }
 
@@ -47,7 +46,7 @@ sourceSets {
 }
 
 project.ext {
-    mainClass = 'com.example.grain.Launcher'
+    mainClass = 'com.sysgears.grain.Main'
     classpath = sourceSets.main.runtimeClasspath
 }
 
