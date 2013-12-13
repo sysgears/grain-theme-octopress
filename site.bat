@@ -17,6 +17,6 @@ IF "%STRIPFIRST%" == "1" (SET ARGS=%ARGS:~1%)
 
 CD %BASEDIR%
 
-gradlew.bat grain "-Pargs=%ARGS%"
+CALL gradlew.bat grain "-Pargs=%ARGS%"
 
 ENDLOCAL
