@@ -60,6 +60,7 @@ task grain() {
             classpath = project.classpath
             main = project.mainClass
             args = getGrainArgs(project)
+            standardInput = System.in
     }
 }
 
