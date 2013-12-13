@@ -19,4 +19,10 @@ CD %BASEDIR%
 
 CALL gradlew.bat grain "-Pargs=%ARGS%"
 
+if "%ERRORLEVEL%"=="0" goto mainEnd
+
+:fail
+exit /b 1
+
+:mainEnd
 ENDLOCAL
