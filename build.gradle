@@ -27,7 +27,7 @@ buildscript {
 repositories {
     mavenCentral()
     maven {
-        url 'http://sysgears.github.io/grain/repo/'
+        url 'http://repo.sysgears.com/releases/'
     }
 }
 
