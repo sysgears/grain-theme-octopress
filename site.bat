@@ -2,9 +2,6 @@
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-SET BASEDIR=%~dp0
-SET BASEDIR=%BASEDIR:~0,-1%
-
 SET ARGS=
 SET STRIPFIRST=0
 
@@ -14,8 +11,6 @@ FOR %%A IN (%*) DO (
 )
 
 IF "%STRIPFIRST%" == "1" (SET ARGS=%ARGS:~1%)
-
-CD %BASEDIR%
 
 CALL gradlew.bat grain "-Pargs=%ARGS%"
 
