@@ -2,7 +2,6 @@ apply plugin: 'maven'
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-apply plugin: 'application'
 version = '1.0.0'
 defaultTasks 'grain'
 
@@ -55,12 +54,14 @@ def getGrainArgs(project) {
         project.args.split(',').toList() : []
 }
 
-task grain() {
-    project.javaexec {
-            classpath = project.classpath
-            main = project.mainClass
-            args = getGrainArgs(project)
-            standardInput = System.in
+task grain {
+    doLast {
+        project.javaexec {
+                classpath = project.classpath
+                main = project.mainClass
+                args = getGrainArgs(project)
+                standardInput = System.in
+        }
     }
 }
 
