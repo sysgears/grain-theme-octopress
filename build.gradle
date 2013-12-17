@@ -31,6 +31,8 @@ repositories {
     mavenCentral()
     maven {
         url 'http://repo.sysgears.com/releases/'
+    }
+    maven {
         url 'http://repo.sysgears.com/snapshots/'
     }
 }
