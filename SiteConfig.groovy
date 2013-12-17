@@ -162,7 +162,7 @@ asides {
 
     // The latest tweets.
     tweets {
-        user = 'sysgears'           // Tweeter (https://twitter.com/) username
+        user = 'sysgears'           // Twitter (https://twitter.com/) username
         count = 2                   // the number of tweets to display
         //consumer_key = ''         // to get consumer key and secret go to https://dev.twitter.com/apps and create a new application
         //consumer_secret = ''
@@ -184,7 +184,7 @@ asides {
         user = 'sysgears'           // Twitter (https://twitter.com/) username
     }
     facebook {
-        user = 'sysgears'           // Facebook https://www.facebook.com/ username
+        user = 'sysgears'           // Facebook (https://www.facebook.com/) username
     }
     instagram {
         user = ''                   // Instagram (http://instagram.com/) username

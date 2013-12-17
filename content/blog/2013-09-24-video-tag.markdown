@@ -11,6 +11,9 @@ published: true
 <!--more-->
 
 <%=
-    video url: 'http://s3.imathis.com/video/zero-to-fancy-buttons.mp4',
-        poster: 'http://s3.imathis.com/video/zero-to-fancy-buttons.png'
+    video urls: [
+        'http://html5demos.com/assets/dizzy.mp4',
+        'http://html5demos.com/assets/dizzy.webm',
+        'http://html5demos.com/assets/dizzy.ogv'
+    ]
 %>
