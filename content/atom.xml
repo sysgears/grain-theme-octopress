@@ -11,7 +11,7 @@
     <email><![CDATA[${site.rss.email}]]></email>
   <% } %>
 </author>
-<generator uri="http://sysgears.com/work/grain/docs/latest/">Grain</generator>
+<generator uri="http://sysgears.com/grain/">Grain</generator>
 
 <% page.posts.each { post -> %>
   <entry>

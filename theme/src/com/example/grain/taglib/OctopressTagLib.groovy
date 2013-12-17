@@ -65,7 +65,7 @@ class OctopressTagLib {
 
     /**
      * Generates html tag for an image
-     * 
+     *
      * @attr location image location
      * @attr width (optional) image width
      * @attr height (optional) image height
@@ -80,23 +80,36 @@ class OctopressTagLib {
     /**
      * Embeds a video into the page.
      *
-     * @attr url link to the video
+     * @attr urls links to the videos
      * @attr poster (optional) link to a poster
      * @attr wight (optional) video wight
      * @attr height (optional) video height
      */
     def video = { Map model = null ->
+
         // validates the tag attributes
-        if (!model.url) throw new IllegalArgumentException('Tag [video] is missing required attribute [url]')
+        if (!model.urls || !(model.urls instanceof List) || model.urls.isEmpty()) {
+            throw new IllegalArgumentException('Tag [video] is missing required attribute [urls]')
+        }
 
-        def types = ['mp4': "video/mp4; codecs='avc1.42E01E, mp4a.40.2'",
-                'ogv': "video/ogg; codecs=theora, vorbis",
-                'webm': "video/webm; codecs=vp8, vorbis"] // supported video types
+        def types = ['mp4': 'video/mp4',
+                'ogv': 'video/ogg',
+                'webm': 'video/webm'] // supported video types
 
-        // adds video type to the model
-        model << [type: types."${model.url.find(/[^\.]+$/)}"]
+        def videoSources = []
 
-        if (!model.type) throw new IllegalArgumentException("Tag [video] does not support [${model.url}] file format")
+        model.urls.each {
+            def type = types."${it.find(/[^\.]+$/)}"
+            if (type) {
+                videoSources << [url: it, type: type]
+            }
+        }
+
+        if (videoSources.isEmpty()) {
+            throw new IllegalArgumentException("Tag [video] does not support file formats of any of the provided video sources")
+        }
+
+        model << [sources: videoSources]
 
         taglib.include('/tags/video.html', [video: model])
     }
