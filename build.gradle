@@ -56,14 +56,16 @@ project.ext {
     classpath = sourceSets.main.runtimeClasspath
 }
 
-def getGrainArgs(project) {
-    def grainOpts = (System.getenv('GRAIN_OPTS') ?:
+def getGrainJvmArgs() {
+    (System.getenv('GRAIN_OPTS') ?:
         '-server -Xmx512M -Xms64M -XX:PermSize=32m -XX:MaxPermSize=256m ' +
         '-Dfile.encoding=UTF-8 -XX:+CMSClassUnloadingEnabled ' +
         '-XX:+UseConcMarkSweepGC').trim().split(' ').toList()
-    def projectArgs = project.hasProperty('args') && project.args.trim() ?
+}
+
+def getGrainArgs(project) {
+    project.hasProperty('args') && project.args.trim() ?
         project.args.split(',').toList() : []
-    grainOpts + projectArgs
 }
 
 task grain {
@@ -72,6 +74,7 @@ task grain {
                 classpath = project.classpath
                 main = project.mainClass
                 args = getGrainArgs(project)
+                jvmArgs = getGrainJvmArgs()
                 standardInput = System.in
         }
     }
