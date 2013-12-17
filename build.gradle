@@ -23,10 +23,15 @@ buildscript {
     }
 }
 
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 repositories {
     mavenCentral()
     maven {
         url 'http://repo.sysgears.com/releases/'
+        url 'http://repo.sysgears.com/snapshots/'
     }
 }
 
