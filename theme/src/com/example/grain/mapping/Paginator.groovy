@@ -8,7 +8,7 @@ class Paginator {
      * @param pages source where to search pages for pagination.
      * @param nameInModel name of variable to write result pages (e.g. posts will be available in view as page.posts)
      * @param perPage how much pages to grab for a single page
-     * @param defaultUrl
+     * @param defaultUrl url, on which, urls of all the pages of this pagination will be based
      * @param customModel append custom model for each pagination page
      *
      * @return list of pagination models
