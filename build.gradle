@@ -58,8 +58,8 @@ project.ext {
 
 def getGrainArgs(project) {
     def grainOpts = (System.getenv('GRAIN_OPTS') ?:
-        '-server -Xmx256M -Xms32M -XX:PermSize=32m ' +
-        '-XX:MaxPermSize=128m -Dfile.encoding=UTF-8').trim().split(' ').toList()
+        '-server -Xmx256M -Xms32M -XX:PermSize=64m ' +
+        '-XX:MaxPermSize=256m -Dfile.encoding=UTF-8').trim().split(' ').toList()
     def projectArgs = project.hasProperty('args') && project.args.trim() ?
         project.args.split(',').toList() : []
     grainOpts + projectArgs
