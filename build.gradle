@@ -31,6 +31,8 @@ repositories {
     mavenCentral()
     maven {
         url 'http://repo.sysgears.com/releases/'
+    }
+    maven {
         url 'http://repo.sysgears.com/snapshots/'
     }
 }
@@ -55,8 +57,13 @@ project.ext {
 }
 
 def getGrainArgs(project) {
-    project.hasProperty('args') && project.args.trim() ?
+    def grainOpts = (System.getenv('GRAIN_OPTS') ?:
+        '-server -Xmx512M -Xms64M -XX:PermSize=32m -XX:MaxPermSize=256m ' +
+        '-Dfile.encoding=UTF-8 -XX:+CMSClassUnloadingEnabled ' +
+        '-XX:+UseConcMarkSweepGC').trim().split(' ').toList()
+    def projectArgs = project.hasProperty('args') && project.args.trim() ?
         project.args.split(',').toList() : []
+    grainOpts + projectArgs
 }
 
 task grain {
