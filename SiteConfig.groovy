@@ -195,7 +195,7 @@ asides {
 }
 
 commands = [
-new_post: { String postTitle ->
+'create-post': { String postTitle ->
     def date = new Date()
     def fileDate = date.format("yyyy-MM-dd")
     def filename = fileDate + "-" + postTitle.encodeAsSlug() + ".markdown"
@@ -210,7 +210,7 @@ comments: true
 published: false
 ---
 """)},
-new_page: { String location, String pageTitle ->
+'create-page': { String location, String pageTitle ->
         def ext = new File(location).extension
         def file
         if (!ext) {
