@@ -56,26 +56,15 @@ project.ext {
     classpath = sourceSets.main.runtimeClasspath
 }
 
-def getGrainJvmArgs() {
-    (System.getenv('GRAIN_OPTS') ?:
-        '-server -Xmx512M -Xms64M -XX:PermSize=32m -XX:MaxPermSize=256m ' +
-        '-Dfile.encoding=UTF-8 -XX:+CMSClassUnloadingEnabled ' +
-        '-XX:+UseConcMarkSweepGC').trim().split(' ').toList()
-}
-
-def getGrainArgs(project) {
-    project.hasProperty('args') && project.args.trim() ?
-        project.args.split(',').toList() : []
-}
-
-task grain {
+task gendeps {
     doLast {
-        project.javaexec {
-                classpath = project.classpath
-                main = project.mainClass
-                args = getGrainArgs(project)
-                jvmArgs = getGrainJvmArgs()
-                standardInput = System.in
+        def depFile = new File(".site-${project.grainVersion}.dep")
+        depFile.withWriter { writer ->
+            project.classpath.files.findAll { it.name.endsWith('.jar') }.sort {
+                !it.name.endsWith("grain-${project.grainVersion}.jar")
+            }.each {
+                writer.append(it.toString()).append('\n')
+            }
         }
     }
 }
