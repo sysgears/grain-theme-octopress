@@ -31,7 +31,6 @@ if [ -n "$GRAIN_OPTS" ]
 JAVA_OPTS="$GRAIN_OPTS $JAVA_OPTS"
 
 # Get target Grain version
-VERSION_REGEX="grain\.version\s*=\s*(.+)"
 APP_PROPS="application.properties"
 
 if [ ! -f $APP_PROPS ]; then
@@ -42,10 +41,9 @@ fi
 while read line; do
     case "$line" in 
         *grain.version*)
-            TMP1=${line/grain.version/};
-            TMP2=${TMP1/=/};
+            TMP="${line#*=}";
             read -r GRAIN_VERSION << eof
-$TMP2
+$TMP
 eof
         ;;
     esac
@@ -75,13 +73,15 @@ if [ ! -f $GRAIN_JAR ]; then
 fi
 
 # Check if site deps are valid
-exec "$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
-if [ $? -eq 2 ]; then
+"$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
+STATUS=$?
+if [ $STATUS -eq 2 ]; then
     # Site deps invalid - regenerate them
     ./gradlew gendeps
     if [ $? -ne 0 ]; then
        exit 1;
     fi
-    exec "$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
+    "$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
+    STATUS=$?
 fi
-
+exit $STATUS
