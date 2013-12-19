@@ -67,15 +67,15 @@ IF NOT EXIST "%SITE_DEPS%" (
 )
 
 @REM Get Grain JAR from site deps
-SET /P TMP=< %SITE_DEPS% 
-SET GRAIN_JAR=%TMP%
+SET /P TMP_VERSION=< %SITE_DEPS% 
+SET GRAIN_JAR=%TMP_VERSION%
 
 IF NOT EXIST "%GRAIN_JAR%" (
     @REM Grain Jar doesn't exist - regenerate site deps and recompute Grain Jar
     CALL gradlew.bat gendeps
     IF NOT "%ERRORLEVEL%"=="0" GOTO fail
-    SET /P TMP=< %SITE_DEPS% 
-    SET GRAIN_JAR=%TMP%
+    SET /P TMP_VERSION=< %SITE_DEPS% 
+    SET GRAIN_JAR=%TMP_VERSION%
 )
 
 @REM Check if site deps are valid
@@ -84,8 +84,8 @@ if "%ERRORLEVEL%"=="2" (
     @REM Site deps invalid - regenerate them
     CALL gradlew.bat gendeps
     IF NOT "%ERRORLEVEL%"=="0" GOTO fail
-    SET /P TMP=< %SITE_DEPS% 
-    SET GRAIN_JAR=%TMP%
+    SET /P TMP_VERSION=< %SITE_DEPS% 
+    SET GRAIN_JAR=%TMP_VERSION%
     "%JAVACMD%" %JAVA_OPTS% -cp %GRAIN_JAR% com.sysgears.grain.SiteLauncher %GRAIN_VERSION% -- %*
 )
 EXIT /B %ERRORLEVEL% 
