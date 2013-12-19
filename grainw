@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+cygwin=false
+case "`uname`" in
+  CYGWIN* )
+    cygwin=true
+    ;;
+esac
+
+if $cygwin ; then
+    [ -n "$JAVA_HOME" ] && JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+fi
+
 # Determine command to run java
 if [ -n "$JAVA_HOME" ] ; then
     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
