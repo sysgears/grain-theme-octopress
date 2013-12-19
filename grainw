@@ -41,9 +41,9 @@ fi
 while read line; do
     case "$line" in 
         *grain.version*)
-            TMP="${line#*=}";
+            TMP_VERSION="${line#*=}";
             read -r GRAIN_VERSION << eof
-$TMP
+$TMP_VERSION
 eof
         ;;
     esac
