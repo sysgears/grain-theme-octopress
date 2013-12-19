@@ -76,29 +76,40 @@ if [ ! -f $SITE_DEPS ]; then
     fi
 fi
 
-# Get Grain JAR from site deps
-read -r GRAIN_JAR < $SITE_DEPS
-
-if [ ! -f $GRAIN_JAR ]; then
-    # Grain Jar doesn't exist - regenerate site deps and recompute Grain Jar
-    ./gradlew gendeps
-    if [ $? -ne 0 ]; then
-       exit 1;
-    fi
+function validateAndLaunch() {
+    # Get Grain JAR from site deps
     read -r GRAIN_JAR < $SITE_DEPS
-fi
+    if $cygwin ; then
+        GRAIN_JAR=`cygpath --unix "$GRAIN_JAR"`
+    fi
 
-# Check if site deps are valid
-"$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
+    if [ ! -f $GRAIN_JAR ]; then
+        # Grain Jar doesn't exist - regenerate site deps and recompute Grain Jar
+        ./gradlew gendeps
+        if [ $? -ne 0 ]; then
+            exit 1;
+        fi
+        read -r GRAIN_JAR < $SITE_DEPS
+    fi
+
+    if $cygwin ; then
+        GRAIN_JAR=`cygpath --path --mixed "$GRAIN_JAR"`
+    fi
+    # Check if site deps are valid
+    "$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
+
+    return $?
+}
+
+validateAndLaunch
 STATUS=$?
 if [ $STATUS -eq 2 ]; then
-    # Site deps invalid - regenerate them
     ./gradlew gendeps
     if [ $? -ne 0 ]; then
        exit 1;
     fi
-    read -r GRAIN_JAR < $SITE_DEPS
-    "$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
+    validateAndLaunch
     STATUS=$?
 fi
+
 exit $STATUS

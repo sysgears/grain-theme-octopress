@@ -39,14 +39,14 @@ SET JAVA_OPTS=%GRAIN_OPTS% %JAVA_OPTS%
 
 @REM Get target Grain version
 
-SET APP_PROPS="application.properties"
+SET APP_PROPS=application.properties
 
 IF NOT EXIST "%APP_PROPS%" (
     ECHO Error: %APP_PROPS% not found
     GOTO fail
 )
 
-FOR /f "tokens=1*delims== " %%a IN (application.properties) DO (
+FOR /f "tokens=1*delims== " %%a IN (%APP_PROPS%) DO (
     IF /i "%%a"=="grain.version" (
         SET "GRAIN_VERSION=%%b"
     )
@@ -58,7 +58,7 @@ IF "%GRAIN_VERSION%" == "" (
 )
 
 @REM Check if site deps exists for current Grain version
-SET SITE_DEPS=".site-%GRAIN_VERSION%.dep"
+SET SITE_DEPS=.site-%GRAIN_VERSION%.dep
 
 IF NOT EXIST "%SITE_DEPS%" (
     @REM Site deps don't exist - generate them
@@ -66,32 +66,40 @@ IF NOT EXIST "%SITE_DEPS%" (
     IF NOT "%ERRORLEVEL%"=="0" GOTO fail
 )
 
-@REM Get Grain JAR from site deps
-SET /P TMP_VERSION=< %SITE_DEPS% 
-SET GRAIN_JAR=%TMP_VERSION%
-
-IF NOT EXIST "%GRAIN_JAR%" (
-    @REM Grain Jar doesn't exist - regenerate site deps and recompute Grain Jar
-    CALL gradlew.bat gendeps
-    IF NOT "%ERRORLEVEL%"=="0" GOTO fail
-    SET /P TMP_VERSION=< %SITE_DEPS% 
-    SET GRAIN_JAR=%TMP_VERSION%
-)
-
-@REM Check if site deps are valid
-"%JAVACMD%" %JAVA_OPTS% -cp %GRAIN_JAR% com.sysgears.grain.SiteLauncher %GRAIN_VERSION% -- %*
+CALL :validateAndLaunch
 if "%ERRORLEVEL%"=="2" (
     @REM Site deps invalid - regenerate them
     CALL gradlew.bat gendeps
     IF NOT "%ERRORLEVEL%"=="0" GOTO fail
-    SET /P TMP_VERSION=< %SITE_DEPS% 
-    SET GRAIN_JAR=%TMP_VERSION%
-    "%JAVACMD%" %JAVA_OPTS% -cp %GRAIN_JAR% com.sysgears.grain.SiteLauncher %GRAIN_VERSION% -- %*
+    CALL :validateAndLaunch
 )
 EXIT /B %ERRORLEVEL% 
 
 :fail
 EXIT /B 1
+
+:validateAndLaunch
+@REM Get Grain JAR from site deps
+FOR /f %%a in (%SITE_DEPS%) do (
+   SET GRAIN_JAR=%%a
+   GOTO _validate1
+)
+:_validate1
+
+IF NOT EXIST "%GRAIN_JAR%" (
+    @REM Grain Jar doesn't exist - regenerate site deps and recompute Grain Jar
+    CALL gradlew.bat gendeps
+    IF NOT "%ERRORLEVEL%"=="0" GOTO fail
+    FOR /f %%a in (%SITE_DEPS%) do (
+        SET GRAIN_JAR=%%a
+        GOTO _validate2
+    )
+)
+:_validate2
+
+@REM Check if site deps are valid
+"%JAVACMD%" %JAVA_OPTS% -cp %GRAIN_JAR% com.sysgears.grain.SiteLauncher %GRAIN_VERSION% -- %*
+GOTO :EOF
 
 :mainEnd
 ENDLOCAL
