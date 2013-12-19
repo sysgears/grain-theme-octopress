@@ -24,7 +24,7 @@ fi
 # Determine java options
 if [ -n "$GRAIN_OPTS" ]
    then
-     GRAIN_OPTS="$GRAILS_OPTS"
+     GRAIN_OPTS="$GRAIN_OPTS"
    else
      GRAIN_OPTS="-server -Xmx256M -Xms32M -XX:PermSize=32m -XX:MaxPermSize=128m -Dfile.encoding=UTF-8"
   fi
