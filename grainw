@@ -34,7 +34,7 @@ JAVA_OPTS="$GRAIN_OPTS $JAVA_OPTS"
 APP_PROPS="application.properties"
 
 if [ ! -f $APP_PROPS ]; then
-    echo "Error: application.propoerties not found";
+    echo "Error: $APP_PROPS not found";
     exit 1;
 fi
 
@@ -48,6 +48,11 @@ eof
         ;;
     esac
 done < $APP_PROPS
+
+if [ -z "$GRAIN_VERSION" ]; then
+    echo "Error: unable to determine Grain version from $APP_PROPS";
+    exit 1;
+fi
 
 # Check if site deps exists for current Grain version
 SITE_DEPS=".site-${GRAIN_VERSION}.dep"
@@ -81,6 +86,7 @@ if [ $STATUS -eq 2 ]; then
     if [ $? -ne 0 ]; then
        exit 1;
     fi
+    read -r GRAIN_JAR < $SITE_DEPS
     "$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
     STATUS=$?
 fi
