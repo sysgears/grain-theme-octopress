@@ -66,12 +66,12 @@ IF NOT EXIST "%SITE_DEPS%" (
     IF NOT "%ERRORLEVEL%"=="0" GOTO fail
 )
 
-CALL :validateAndLaunch
+CALL :validateAndLaunch %*
 if "%ERRORLEVEL%"=="2" (
     @REM Site deps invalid - regenerate them
     CALL gradlew.bat gendeps
     IF NOT "%ERRORLEVEL%"=="0" GOTO fail
-    CALL :validateAndLaunch
+    CALL :validateAndLaunch %*
 )
 EXIT /B %ERRORLEVEL% 
 
