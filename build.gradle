@@ -58,9 +58,10 @@ project.ext {
 
 task gendeps {
     doLast {
+        def classpath = project.classpath.files
         def depFile = new File(".site-${project.grainVersion}.dep")
         depFile.withWriter { writer ->
-            project.classpath.files.findAll { it.name.endsWith('.jar') }.sort {
+            classpath.findAll { it.name.endsWith('.jar') }.sort {
                 !it.name.endsWith("grain-${project.grainVersion}.jar")
             }.each {
                 writer.append(it.toString()).append('\n')
