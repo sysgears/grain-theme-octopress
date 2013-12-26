@@ -80,7 +80,10 @@ EXIT /B 1
 
 :validateAndLaunch
 @REM Get Grain JAR from site deps
-FOR /f %%a in (%SITE_DEPS%) do (
+
+FOR /F ^"usebackq^ eol^=^
+
+^ delims^=^" %%a in (%SITE_DEPS%) do (
    SET GRAIN_JAR=%%a
    GOTO _validate1
 )
@@ -98,7 +101,7 @@ IF NOT EXIST "%GRAIN_JAR%" (
 :_validate2
 
 @REM Check if site deps are valid
-"%JAVACMD%" %JAVA_OPTS% -cp %GRAIN_JAR% com.sysgears.grain.SiteLauncher %GRAIN_VERSION% -- %*
+"%JAVACMD%" %JAVA_OPTS% -cp "%GRAIN_JAR%" com.sysgears.grain.SiteLauncher %GRAIN_VERSION% -- %*
 GOTO :EOF
 
 :mainEnd
