@@ -199,7 +199,12 @@ commands = [
     def date = new Date()
     def fileDate = date.format("yyyy-MM-dd")
     def filename = fileDate + "-" + postTitle.encodeAsSlug() + ".markdown"
-    def file = new File(content_dir + "/blog/" + filename)
+    def blogDir = new File(content_dir + "/blog/")
+    if (!blogDir.exists()) {
+        blogDir.mkdirs()
+    }
+    def file = new File(blogDir, filename)
+
     file.exists() || file.write("""---
 layout: post
 title: "${postTitle}"
