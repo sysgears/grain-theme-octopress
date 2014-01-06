@@ -1,12 +1,15 @@
 <% if (site.asides?.github?.user) { %>
 <section>
   <h1>GitHub Repos</h1>
+  <% if (site.asides.github.show_repos == true) { %>
   <ul id="gh_repos">
     <li class="loading">Status updating...</li>
   </ul>
+  <% } %>
   <% if (site.asides.github.show_profile_link == true) { %>
     <a href="https://github.com/${site.asides.github.user}">${site.asides.github.user}</a> on GitHub
   <% } %>
+  <% if (site.asides.github.show_repos == true) { %>
   <script type="text/javascript">
     $(function(){
         if (!window.jXHR){
@@ -25,5 +28,6 @@
         });
     });
   </script>
+  <% } %>
 </section>
 <% } %>
