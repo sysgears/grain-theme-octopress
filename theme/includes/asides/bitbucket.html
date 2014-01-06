@@ -1,0 +1,8 @@
+<% if (site.asides?.bitbucket?.user) { %>
+<section>
+  <h1>BitBucket Repos</h1>
+  <% if (site.asides.bitbucket.show_profile_link) { %>
+    <a href="https://bitbucket.org/${site.asides.bitbucket.user}">${site.asides.bitbucket.user}</a> on BitBucket
+  <% } %>
+</section>
+<% } %>

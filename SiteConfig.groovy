@@ -129,7 +129,7 @@ sharing {
 }
 
 // Sidebar modules that should be included by default.
-default_asides = ['asides/recent_posts.html', 'asides/github.html', 'asides/tweets.html', 'asides/delicious.html',
+default_asides = ['asides/recent_posts.html', 'asides/bitbucket.html', 'asides/github.html', 'asides/tweets.html', 'asides/delicious.html',
         'asides/pinboard.html', 'asides/about.html', 'asides/facebook.html', 'asides/twitter.html',
         'asides/instagram.html', 'asides/google_plus.html']
 
@@ -150,6 +150,12 @@ asides {
     pinboard {
         user = ''                   // Pinboard (http://pinboard.in/) username
         count = 5                   // the number of bookmarks to show
+    }
+
+    // BitBucket repositories.
+    bitbucket {
+        user = ''                   // BitBucket (https://bitbucket.org/) username
+        show_profile_link = true    // whether to show link to BitBucket profile
     }
 
     // GitHub repositories.
