@@ -3,7 +3,7 @@
 <title><![CDATA[${site.title}]]></title>
 <link href="${site.url}${page.url}" rel="self"/>
 <link href="${site.url}/"/>
-<updated>${xmlDateTime(page.lastUpdated)}</updated>
+<updated>${xmlDateTime date: page.lastUpdated}</updated>
 <id>${site.url}/</id>
 <author>
   <name><![CDATA[${site.author}]]></name>
@@ -17,7 +17,7 @@
   <entry>
     <title type="html"><![CDATA[${post.title}]]></title>
     <link href="${site.url}${post.url}"/>
-    <updated>${xmlDateTime(post.updated)}</updated>
+    <updated>${xmlDateTime date: post.updated}</updated>
     <id>${post.url}</id>
     <content type="html"><![CDATA[${post.render().content}]]></content>
   </entry>

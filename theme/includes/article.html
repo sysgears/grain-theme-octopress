@@ -2,9 +2,9 @@
 <% if (!page.header) { %>
   <header>
     <% if (page.index) { %>
-      <h1 class="entry-title"><a href="${site.url}${page.url}">${titleCase(page.title)}</a></h1>
+      <h1 class="entry-title"><a href="${site.url}${page.url}">${titleCase title: page.title}</a></h1>
     <% } else { %>
-      <h1 class="entry-title">${titleCase(page.title)}</h1>
+      <h1 class="entry-title">${titleCase title: page.title}</h1>
     <% } %>
     <% if (!page.meta) { %>
       <p class="meta">

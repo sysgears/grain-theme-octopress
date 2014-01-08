@@ -3,6 +3,6 @@
   def day = date.format('dd')
   def month = date.format('MMM')
 %>
-<time datetime="${xmlDateTime(date)}" pubdate>
+<time datetime="${xmlDateTime date: date}" pubdate>
   <span class="month">${month}</span> <span class="day">${day}</span>
 </time>

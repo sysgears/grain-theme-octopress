@@ -9,7 +9,7 @@
 %>
 
 <% if (when == 'posted') { %>
-    <time datetime="${xmlDateTime(postedOn)}" pubdate ${ updatedOn != postedOn ? 'data-updated=true' : '' }>
+    <time datetime="${xmlDateTime date: postedOn}" pubdate ${ updatedOn != postedOn ? 'data-updated=true' : '' }>
       <span class="month">${postedOn.format(monthFormat)}</span>
       <span class="day">${postedOn.format(dayFormat)}</span>,
       <span class="year">${postedOn.format(yearFormat)}</span>
@@ -17,7 +17,7 @@
   <% } %>
 
 <% if (when == 'updated' && updatedOn) { %>
-     <time datetime="${xmlDateTime(updatedOn)}" class="updated">
+     <time datetime="${xmlDateTime date: updatedOn}" class="updated">
        Updated
        <span class="month">${updatedOn.format(monthFormat)}</span>
        <span class="day">${updatedOn.format(dayFormat)}</span>,

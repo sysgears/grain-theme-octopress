@@ -71,11 +71,13 @@ class OctopressTagLib {
      * @attr width (optional) image width
      * @attr height (optional) image height
      */
-    def img = { String location, Integer width = null, Integer height = null ->
-        def widthStr = width ? " width=\"${width}\"" : ""
-        def heightStr = height ? " height=\"${height}\"" : ""
+    def img = { Map model ->
+        if (!model.location) throw new IllegalArgumentException('Tag [img] is missing required attribute [location]')
 
-        "<img${widthStr}${heightStr} src=\"${taglib.r(location)}\" alt=\"image\">"
+        def widthStr = model.width ? " width=\"${model.width}\"" : ""
+        def heightStr = model.height ? " height=\"${model.height}\"" : ""
+
+        "<img${widthStr}${heightStr} src=\"${taglib.r(model.location)}\" alt=\"image\">"
     }
 
     /**
@@ -119,27 +121,29 @@ class OctopressTagLib {
      * Converts title by applying Title Case capitalizing convention (capitalizes all principal words).
      *
      * @attr title the title to convert
-     *
-     * @return title-case string
      */
-    static def titleCase = { String title ->
+    def titleCase = { Map model ->
+        if (!model.title) throw new IllegalArgumentException('Tag [titleCase] is missing required attribute [title]')
+
         def nonPrincipalWords = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'en', 'for', 'if', 'in',
                 'of', 'on', 'or', 'the', 'to', 'v', 'v.', 'via', 'vs', 'vs.']
-        title.split(' ').inject(new StringBuilder()) {result, word ->
+
+        model.title.split(' ').inject(new StringBuilder()) {result, word ->
             word in nonPrincipalWords ? result.append(word) : result.append(StringUtils.capitalize(word))
             result.append(' ')
         } .toString().trim()
     }
 
     /**
-     * Converts a date to XML date time format.
+     * Converts a date to XML date time format: 2013-12-31T12:49:00+07:00
      *
      * @attr date the date to convert
-     *
-     * @return XML date time representation of the date, for instance 2013-12-31T12:49:00+07:00
      */
-    static def xmlDateTime = { Date date ->
-        def tz = String.format('%tz', date)
-        String.format("%tFT%<tT${tz.substring(0, 3)}:${tz.substring(3)}", date)
+    def xmlDateTime = { Map model ->
+        if (!model.date) throw new IllegalArgumentException('Tag [xmlDateTime] is missing required attribute [date]')
+
+        def tz = String.format('%tz', model.date)
+
+        String.format("%tFT%<tT${tz.substring(0, 3)}:${tz.substring(3)}", model.date)
     }
 }

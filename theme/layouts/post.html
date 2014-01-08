@@ -17,10 +17,10 @@ single: true
     <% } %>
     <p class="meta">
       <% if (page.prev_post?.url) { %>
-        <a class="basic-alignment left" href="${page.prev_post.url}" title="Previous Post: ${page.prev_post.title}">&laquo; ${titleCase(page.prev_post.title)}</a>
+        <a class="basic-alignment left" href="${page.prev_post.url}" title="Previous Post: ${page.prev_post.title}">&laquo; ${titleCase title: page.prev_post.title}</a>
       <% } %>
       <% if (page.next_post?.url) { %>
-        <a class="basic-alignment right" href="${page.next_post.url}" title="Next Post: ${page.next_post.title}">${titleCase(page.next_post.title)} &raquo;</a>
+        <a class="basic-alignment right" href="${page.next_post.url}" title="Next Post: ${page.next_post.title}">${titleCase title: page.next_post.title} &raquo;</a>
       <% } %>
     </p>
   </footer>
