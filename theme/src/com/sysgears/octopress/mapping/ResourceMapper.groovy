@@ -74,9 +74,6 @@ class ResourceMapper {
             case ~/\/blog\/.*/:
                 update.url = getPostUrl('/blog/', resource)
                 break
-            case ~/\/errors.*/:
-                update.url = "/errors/"
-                break
         }
 
         resource + update
