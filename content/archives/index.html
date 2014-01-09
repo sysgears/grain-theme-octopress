@@ -1,21 +1,38 @@
 ---
-layout: archives
+layout: default
 title: Blog Archives
 menu_title: Archives
 navigate: true
 ---
 
-<div id="blog-archives">
-  <%
-    def year
-    page.posts.each { post ->
-      def yearOfPost = post.date.format('yyyy')
-      if (year != yearOfPost) {
-        year = yearOfPost %>
-        <h2>${year}</h2>
-      <% } %>
-  <article>
-    ${include 'archive_post.html', post}
-  </article>
-  <% } %>
+<div>
+    <article role="article">
+        <header>
+            <h1 class="entry-title">${titleCase title: page.title}</h1>
+        </header>
+        <div id="blog-archives">
+            <%
+            page.posts.groupBy { post -> post.date.format('yyyy') } .each { year, posts -> %>
+                <h2>${year}</h2>
+                <% posts.each { post -> %>
+                    <article>
+                        ${include 'archive_post.html', post}
+                    </article>
+                <% }
+            } %>
+        </div>
+    </article>
+    <div class="pagination">
+        <div class="links">
+            <% if (page.paginator?.prev_page) { %>
+                <a class="prev" href="${page.paginator.prev_page}">&larr; Newer</a>
+            <% } %>
+            <% if (page.paginator?.next_page) { %>
+                <a class="next" href="${page.paginator.next_page}">Older &rarr;</a>
+            <% } %>
+        </div>
+    </div>
 </div>
+
+
+${include 'sidebar.html'}
