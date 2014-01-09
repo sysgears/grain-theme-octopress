@@ -1,4 +1,4 @@
-package com.example.grain.taglib
+package com.sysgears.octopress.taglib
 
 import com.sun.xml.internal.ws.util.StringUtils
 import com.sysgears.grain.taglib.GrainTagLib

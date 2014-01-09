@@ -1,4 +1,4 @@
-package com.example.grain;
+package com.sysgears.octopress;
 
 import com.sysgears.grain.Main;
 

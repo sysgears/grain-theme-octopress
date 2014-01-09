@@ -1,4 +1,4 @@
-package com.example.grain.twitter
+package com.sysgears.octopress.twitter
 
 import com.sysgears.grain.taglib.Site
 import groovyx.net.http.RESTClient

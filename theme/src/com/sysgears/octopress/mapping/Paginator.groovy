@@ -1,4 +1,4 @@
-package com.example.grain.mapping
+package com.sysgears.octopress.mapping
 
 class Paginator {
 
