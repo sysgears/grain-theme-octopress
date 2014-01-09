@@ -1,4 +1,4 @@
-package com.sysgears.octopress.mapping
+package com.sysgears.octopress.mapping.pagination
 
 class Paginator {
 

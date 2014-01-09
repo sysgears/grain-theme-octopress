@@ -1,7 +1,6 @@
-package com.sysgears.octopress.mapping
+package com.sysgears.octopress.mapping.twitter
 
 import com.sysgears.grain.taglib.Site
-import com.sysgears.octopress.twitter.TwitterApiConnector
 import net.sf.json.JSONArray
 
 import java.util.concurrent.TimeUnit

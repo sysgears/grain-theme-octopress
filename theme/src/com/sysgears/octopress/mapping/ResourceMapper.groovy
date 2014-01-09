@@ -1,9 +1,9 @@
-package com.sysgears.octopress
+package com.sysgears.octopress.mapping
 
 import com.sysgears.grain.taglib.GrainUtils
 import com.sysgears.grain.taglib.Site
-import com.sysgears.octopress.mapping.Paginator
-import com.sysgears.octopress.mapping.TweetsFetcher
+import com.sysgears.octopress.mapping.pagination.Paginator
+import com.sysgears.octopress.mapping.twitter.TweetsFetcher
 
 /**
  * Change pages urls and extend models.

@@ -1,5 +1,5 @@
-import com.sysgears.octopress.ResourceMapper
-import com.sysgears.octopress.taglib.OctopressTagLib
+import com.sysgears.octopress.mapping.ResourceMapper
+import com.sysgears.octopress.taglibs.OctopressTagLib
 
 /*
  * Grain configuration.
