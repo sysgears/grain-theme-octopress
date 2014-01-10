@@ -92,5 +92,5 @@ License
 Grain Octopress theme is licensed under the terms of the
 [MIT License][MIT License].
 
-[MIT License]: https://github.com/sysgears/grain-theme-octopress/LICENSE
+[MIT License]: https://github.com/sysgears/grain-theme-octopress/blob/master/LICENSE
 
