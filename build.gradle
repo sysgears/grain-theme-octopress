@@ -2,7 +2,7 @@ apply plugin: 'maven'
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-version = '0.3.2-SNAPSHOT'
+version = '0.3.2'
 defaultTasks 'grain'
 
 def compatibilityVersion = 1.5
