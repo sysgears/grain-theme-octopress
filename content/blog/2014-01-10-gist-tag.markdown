@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Gist tag
-date: 2013-09-24 11:34
+title: "Gist tag"
+date: "2014-01-10 14:00"
 author: SysGears
 categories: [grain, groovy]
 comments: true
@@ -9,6 +9,16 @@ published: true
 ---
 
 <!--more-->
+
+####Code:
+
+```grain
+<%=
+    gist id: 'dc3bf4796acd6a1439bc'
+%>
+```
+
+####Result:
 
 <%=
     gist id: 'dc3bf4796acd6a1439bc'
