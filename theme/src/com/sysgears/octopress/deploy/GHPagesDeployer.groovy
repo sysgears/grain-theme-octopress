@@ -24,8 +24,10 @@ class GHPagesDeployer {
         def destinationDir = site.destination_dir
         def ghPagesUrl = site.gh_pages_url
 
+        def ant = new AntBuilder()
+
         if (!ghPagesUrl) {
-            System.err.println('Couldn\'t upload to GitHub Pages, please specify your GitHub repo url first')
+            ant.echo('Couldn\'t upload to GitHub Pages, please specify your GitHub repo url first')
             return
         }
 
@@ -33,7 +35,6 @@ class GHPagesDeployer {
         def workingBranch = isUserPage ? 'master' : 'gh-pages'
         def cacheDeployDir = "$cacheDir/gh-deploy"
 
-        def ant = new AntBuilder()
         def ghPagesExists = !isUserPage ? ghPagesBranchExists(ant, ghPagesUrl) : null
 
         def git = { List args ->
@@ -62,8 +63,20 @@ class GHPagesDeployer {
                 fileset(dir: destinationDir)
             }
             git(['add', '.'])
-            git(['commit', '-m', 'Updated site'])
-            git(['push', 'origin', "$workingBranch:$workingBranch"])
+        }
+
+        def filesToBeDeleted = getListOfDeletedFiles(ant, cacheDeployDir)
+
+        def continueDeploy = filesToBeDeleted.isEmpty() ?: askContinueDeploy(ant, filesToBeDeleted)
+
+        ant.sequential {
+            if (continueDeploy) {
+                if (!filesToBeDeleted.isEmpty()) {
+                    git(['add', '-u'])
+                }
+                git(['commit', '-m', 'Updated site'])
+                git(['push', 'origin', "$workingBranch:$workingBranch"])
+            }
             ant.delete(dir: cacheDeployDir)
         }
     }
@@ -80,5 +93,44 @@ class GHPagesDeployer {
             ['ls-remote', '--heads', ghPagesUrl].collect { arg(value: it) }
         }
         ant.project.properties.gitLsOutput.contains('refs/heads/gh-pages')
+    }
+
+    /**
+     * Returns the list of files to be deleted after deploy.
+     *
+     * @param ant AntBuilder instance
+     * @param cacheDeployDir cache deploy dir
+     * @return list of files
+     */
+    private def getListOfDeletedFiles(AntBuilder ant, String cacheDeployDir) {
+        ant.exec(executable: 'git', outputproperty: 'gitStatusOutput', dir: cacheDeployDir) {
+            arg(value: 'status')
+        }
+        def gStatus = ant.project.properties.gitStatusOutput
+        def filesToBeDeleted = []
+        gStatus.eachLine {
+            def matcher = it =~ /#\s+deleted:\s+(.+)/
+            if (matcher.matches()) {
+                filesToBeDeleted << matcher[0][1]
+            }
+        }
+
+        filesToBeDeleted
+    }
+
+    /**
+     * Asks whether user wants to continue deploy.
+     *
+     * @param ant AntBuilder instance
+     * @param filesToBeDeleted list of the files to be removed
+     * @return true, if user confirms he wants to continue deploy, false otherwise
+     */
+    private def askContinueDeploy(AntBuilder ant, List filesToBeDeleted) {
+        def fileList = new StringBuilder()
+        filesToBeDeleted.each { fileList << "$it\n" }
+        def message = "Files to be deleted from the repo:\n${fileList}Сontinue deploy?"
+        ant.input(message: message, validargs: 'y,n', addProperty: 'answer')
+        def answer = ant.project.properties.answer
+        answer.equals('y')
     }
 }
