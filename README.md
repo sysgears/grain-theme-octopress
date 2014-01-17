@@ -6,7 +6,7 @@ This is a port of Octopress blogging theme for Grain framework.
 Contributing
 ============
 
-Any person or company wanting to contribute to Grain Framework should follow
+Any person or company wanting to contribute to this project should follow
 the following rules in order to their contribution being accepted.
 
 Sign your Work
