@@ -1,3 +1,4 @@
+import com.sysgears.octopress.deploy.GHPagesDeployer
 import com.sysgears.octopress.mapping.ResourceMapper
 import com.sysgears.octopress.taglibs.OctopressTagLib
 
@@ -72,7 +73,10 @@ rsync_ssh_port = "22"
 rsync_document_root = "~/public_html/"
 rsync_deploy_cmd = "rsync -avze 'ssh -p ${rsync_ssh_port}' --delete ${destination_dir} ${rsync_ssh_user}:${rsync_document_root}"
 
-deploy = s3_deploy_cmd
+gh_pages_url = '' // path to GitHub repository in format git@github.com:{username}/{repo}.git
+github_pages_deploy_cmd = new GHPagesDeployer(site).deploy
+
+deploy = github_pages_deploy_cmd
 
 /*
  * Site configuration.
