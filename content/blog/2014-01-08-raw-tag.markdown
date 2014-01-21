@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Raw tag"
+date: "2014-01-08 15:00"
+author: SysGears
+categories: [grain, groovy]
+comments: true
+published: true
+---
+
+<!--more-->
+
+Raw tag is used here to prevent groovy code parsing.
+
+####Code:
+
+```grain
+<%= raw text: '${ 2 + 2 }' %> = ${ 2 + 2 }
+```
+
+####Result:
+
+<%= raw text: '${ 2 + 2 }' %> = ${ 2 + 2 }

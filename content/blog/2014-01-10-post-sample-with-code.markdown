@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Post sample with code
-date: 2013-10-21 17:33
+title: "Post sample with code"
+date: "2014-01-10 15:00"
 author: SysGears
 categories: [grain, groovy]
 comments: true                    # disables/enables comments section for the post
@@ -11,10 +11,32 @@ asides: [ asides/recent_posts.html, asides/github.html,
   asides/about.html]              # (optional) asides to include into the post page, all asides are included by default
 ---
 
-Here is a Groovy code sample:
-
 <!--more-->
 
+##Example with line numbers:
+
+####Code:
+
+&#096;&#096;&#096;groovy HelloWorld.groovy<br>
+println "Hello, world!"<br>
+&#096;&#096;&#096;
+
+####Result:
+
 ```groovy HelloWorld.groovy
+println "Hello, world!"
+```
+
+##Example without line numbers:
+
+####Code:
+
+&#096;&#096;&#096;groovy**:nl** HelloWorld.groovy<br>
+println "Hello, world!"<br>
+&#096;&#096;&#096;
+
+####Result:
+
+```groovy:nl HelloWorld.groovy
 println "Hello, world!"
 ```

@@ -27,7 +27,7 @@ destination_dir = "${base_dir}/target"
 excludes = ['/sass/.*', '/src/.*', '/target/.*']
 
 //Embedded code configuration
-code_enabled_files = ['html', 'md', 'markdown', 'xml', 'css', 'rst']
+code_enabled_files = ['html', 'md', 'markdown', 'xml', 'css', 'rst', 'adoc', 'asciidoc']
 code_allowed_files = ['txt', 'js', 'rb']
 
 features {

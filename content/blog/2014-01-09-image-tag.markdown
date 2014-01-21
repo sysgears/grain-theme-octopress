@@ -1,0 +1,37 @@
+---
+layout: post
+title: "Image tag"
+date: "2014-01-09 15:00"
+author: SysGears
+categories: [grain, groovy]
+comments: true
+published: true
+---
+
+<!--more-->
+
+Note, that theme `img` tag can handle all the attributes of standard HTML 'img' tag, such as align, border, etc.
+
+##Link to the internal image:
+
+####Code:
+
+```grain
+<%= img src: '/images/email.png', alt: 'email image' %>
+```
+
+####Result:
+
+<%= img src: '/images/email.png', alt: 'email image' %>
+
+##Link to the external image:
+
+####Code:
+
+```grain
+<%= img src: 'http://cdn1.sysgears.com/images/grain/logo-cacd6d0f221a8f8cab3c46db5b0e730a.png', height: 100, width: 200 %>
+```
+
+####Result:
+
+<%= img src: 'http://cdn1.sysgears.com/images/grain/logo-cacd6d0f221a8f8cab3c46db5b0e730a.png', height: 100, width: 200 %>

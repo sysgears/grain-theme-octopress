@@ -6,7 +6,7 @@ This is a port of Octopress blogging theme for Grain framework.
 Contributing
 ============
 
-Any person or company wanting to contribute to Grain Framework should follow
+Any person or company wanting to contribute to this project should follow
 the following rules in order to their contribution being accepted.
 
 Sign your Work
@@ -92,5 +92,5 @@ License
 Grain Octopress theme is licensed under the terms of the
 [MIT License][MIT License].
 
-[MIT License]: https://github.com/sysgears/grain-theme-octopress/LICENSE
+[MIT License]: https://github.com/sysgears/grain-theme-octopress/blob/master/LICENSE
 

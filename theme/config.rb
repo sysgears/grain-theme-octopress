@@ -9,7 +9,6 @@ script: true
   def cssPath = toCanonicalPath site.cache_dir, '/compass/stylesheets'
   new File(cssPath).mkdirs()
 %>
-require 'susy'
 
 # Require any additional compass plugins here.
 project_type = :stand_alone
