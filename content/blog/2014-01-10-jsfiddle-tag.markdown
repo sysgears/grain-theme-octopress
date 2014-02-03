@@ -12,7 +12,7 @@ published: true
 
 ####Code:
 
-```grain
+```jsp
 <%= jsfiddle shorttag: '8wcwq', width: '90%', skin: 'light', tabs: 'html,css,js,result' %>
 ```
 

@@ -16,7 +16,7 @@ Note, that theme `img` tag can handle all the attributes of standard HTML 'img' 
 
 ####Code:
 
-```grain
+```jsp
 <%= img src: '/images/email.png', alt: 'email image' %>
 ```
 
@@ -28,7 +28,7 @@ Note, that theme `img` tag can handle all the attributes of standard HTML 'img' 
 
 ####Code:
 
-```grain
+```jsp
 <%= img src: 'http://cdn1.sysgears.com/images/grain/logo-cacd6d0f221a8f8cab3c46db5b0e730a.png', height: 100, width: 200 %>
 ```
 

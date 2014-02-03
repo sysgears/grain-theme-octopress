@@ -14,7 +14,7 @@ published: true
 
 ####Code:
 
-```grain
+```jsp
 <%= pullquote content:
 '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. {/Ut enim ad minim veniam/}. Quis nostrud exercitation ullamco
@@ -38,7 +38,7 @@ qui officia deserunt mollit anim id est laborum.'''
 
 ####Code:
 
-```grain
+```jsp
 <%= pullquote align: 'left', content:
 '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. {/Ut enim ad minim veniam/}. Quis nostrud exercitation ullamco

@@ -12,7 +12,7 @@ published: true
 
 ####Code:
 
-```grain
+```jsp
 <%= blockquote content:
 '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua.'''
@@ -30,7 +30,7 @@ incididunt ut labore et dolore magna aliqua.'''
 
 ####Code:
 
-```grain
+```jsp
 <%= blockquote author: 'John Doe', sourceTitle: 'Lorem ipsum', content:
 '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua.'''
@@ -48,7 +48,7 @@ incididunt ut labore et dolore magna aliqua.'''
 
 ####Code:
 
-```grain
+```jsp
 <%= blockquote author: 'John Doe', sourceLink: 'http://example.com', content:
 '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua.'''
@@ -66,7 +66,7 @@ incididunt ut labore et dolore magna aliqua.'''
 
 ####Code:
 
-```grain
+```jsp
 <%= blockquote author: 'John Doe', sourceTitle: 'Lorem ipsum', sourceLink: 'http://example.com', content:
 '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua.'''

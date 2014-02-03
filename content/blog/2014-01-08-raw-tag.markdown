@@ -14,7 +14,7 @@ Raw tag is used here to prevent groovy code parsing.
 
 ####Code:
 
-```grain
+```jsp
 <%= raw text: '${ 2 + 2 }' %> = ${ 2 + 2 }
 ```
 

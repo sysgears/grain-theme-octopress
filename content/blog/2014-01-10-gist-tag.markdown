@@ -12,7 +12,7 @@ published: true
 
 ####Code:
 
-```grain
+```jsp
 <%=
     gist id: 'dc3bf4796acd6a1439bc'
 %>
