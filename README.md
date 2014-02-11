@@ -3,6 +3,63 @@ Octopress Grain Theme
 
 This is a port of Octopress blogging theme for Grain framework.
 
+Features
+========
+
+Octopress theme out of the box provides all the necessary features and tools to instantly start blogging,
+implement custom pages and organize posts. Moreover, it offers the same site structure as original Octoperess to
+ensure simple and painless migration.
+
+The latest version of the theme comes with:
+
+  - integration with social networks: Facebook, Twitter, Google+, GitHub, etc.
+  - various content formatting tools to easily customize blog content
+  - built-in atom news feed
+
+[tag_library]: #Tag%20Library
+
+Commands
+--------
+
+The theme ships with a few handy commands that allow to create new pages and posts:
+
+``` sh:nl
+./grainw create-page "/portfolio" "Portfolio" # adds "Portfolio" page to a blog
+```
+
+``` sh:nl
+./grainw create-post "Post Sample" # adds new post 'Post Sample'
+```
+
+Customization
+-------------
+
+Theme configuration settings allow to change a blog name, meta information, the number of posts per page,
+set sharing options and rearrange sidebar sections.
+
+At this time, the theme ships with the next sidebar modules:
+
+  - **recent_posts** - shows the latest posts
+  - **tweets** - shows the most recent tweets
+  - **github** - displays links to GitHub repositories
+  - **pinboard** and **delicious** - show recent Pinboard and Delicious bookmarks
+  - **google_plus**, **facebook**, **twitter** and **instagram** - render links to social networks
+
+Tag Library
+-----------
+
+Theme's tag library provides content formatting features similar to Octopress [plugins][plugins].
+
+Currently, the following tags are available to use:
+
+  - **blockquote** - renders a block quote with quote text, author and source
+  - **pullquote** - renders a *HTML5 + CSS* pull quote
+  - **img** - embeds an image into a page
+  - **gist** - downloads and embeds a GitHub gist
+  - **video** - embeds a HTML5 video encoded as *mp4*, *ogv* or *webm*
+
+[plugins]: http://octopress.org/docs/plugins/
+
 Contributing
 ============
 
