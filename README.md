@@ -16,15 +16,13 @@ The latest version of the theme comes with:
   - various content formatting tools to easily customize blog content
   - built-in atom news feed
 
-[tag_library]: #Tag%20Library
-
 Commands
 --------
 
 The theme ships with a few handy commands that allow to create new pages and posts:
 
 ``` sh:nl
-./grainw create-page "/portfolio" "Portfolio" # adds "Portfolio" page to a blog
+./grainw create-page "/portfolio" "Portfolio" # adds 'Portfolio' page to a blog
 ```
 
 ``` sh:nl
