@@ -25,10 +25,10 @@ navigate: true
     <div class="pagination">
         <div class="links">
             <% if (page.paginator?.prev_page) { %>
-                <a class="prev" href="${site.url}${page.paginator.prev_page}">&larr; Newer</a>
+                <a class="prev" href="${link page.paginator.prev_page}">&larr; Newer</a>
             <% } %>
             <% if (page.paginator?.next_page) { %>
-                <a class="next" href="${site.url}${page.paginator.next_page}">Older &rarr;</a>
+                <a class="next" href="${link page.paginator.next_page}">Older &rarr;</a>
             <% } %>
         </div>
     </div>

@@ -3,7 +3,7 @@
   <ul id="recent_posts">
     <% page.recent_posts.each { post -> %>
       <li class="post">
-        <a href="${site.url}${post.url}">${titleCase title: post.title}</a>
+        <a href="${link post.url}">${titleCase title: post.title}</a>
       </li>
     <% } %>
   </ul>

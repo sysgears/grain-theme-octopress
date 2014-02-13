@@ -2,7 +2,7 @@
 <div class="categories">
   <p class="meta">Tags:</p>
   <% page.categories.each { category -> %>
-     <a class="category" href="${site.url}/categories/${category.encodeAsSlug()}/">${category.toLowerCase()}</a>
+     <a class="category" href="${link ('/categories/' + category.encodeAsSlug())}/">${category.toLowerCase()}</a>
   <% } %>
 </div>
 <% } %>

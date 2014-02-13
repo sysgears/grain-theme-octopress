@@ -2,7 +2,7 @@
 <% if (!page.header) { %>
   <header>
     <% if (page.index) { %>
-      <h1 class="entry-title"><a href="${site.url}${page.url}">${titleCase title: page.title}</a></h1>
+      <h1 class="entry-title"><a href="${link page.url}">${titleCase title: page.title}</a></h1>
     <% } else { %>
       <h1 class="entry-title">${titleCase title: page.title}</h1>
     <% } %>
@@ -20,7 +20,7 @@
   <div class="entry-content">${page.brief}</div>
   <% if (page.excerpted) { %>
     <footer>
-      <a rel="full-article" class="button" href="${site.url}${page.url}">${page.button ?: 'Read more &rarr;'}</a>
+      <a rel="full-article" class="button" href="${link page.url}">${page.button ?: 'Read more &rarr;'}</a>
     </footer>
   <% } %>
 <% } else { %>
