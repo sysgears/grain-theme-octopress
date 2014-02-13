@@ -10,26 +10,6 @@ import com.sysgears.octopress.taglibs.OctopressTagLib
 resource_mapper = new ResourceMapper(site).map
 tag_libs = [OctopressTagLib]
 
-// Locale and datetime format.
-Locale.setDefault(Locale.US)
-datetime_format = 'yyyy-MM-dd HH:mm'
-
-// Site directories.
-base_dir = System.getProperty('user.dir')
-cache_dir = "${base_dir}/.cache"
-content_dir = "${base_dir}/content"
-theme_dir = "${base_dir}/theme"
-source_dir = [content_dir, theme_dir, "${cache_dir}/compass"]
-include_dir = "${theme_dir}/includes"
-layout_dir = "${theme_dir}/layouts"
-destination_dir = "${base_dir}/target"
-
-excludes = ['/sass/.*', '/src/.*', '/target/.*']
-
-//Embedded code configuration
-code_enabled_files = ['html', 'md', 'markdown', 'xml', 'css', 'rst', 'adoc', 'asciidoc']
-code_allowed_files = ['txt', 'js', 'rb']
-
 features {
     highlight = "pygments"
     cache_highlight = "true"
@@ -40,14 +20,12 @@ features {
 environments {
     dev {
         log.info "Development environment is used"
-        jetty_port = 4000
         url = "http://localhost:${jetty_port}"
         show_unpublished = true
     }
     prod {
         log.info "Production environment is used"
-        jetty_port = 4000
-        url = "http://localhost:${jetty_port}"
+        url = '' // the site URL, for instance http://example.com
         show_unpublished = false
         features {
             minify_xml = true
