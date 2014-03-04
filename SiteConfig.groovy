@@ -11,20 +11,18 @@ resource_mapper = new ResourceMapper(site).map
 tag_libs = [OctopressTagLib]
 
 features {
-    highlight = "pygments"
-    cache_highlight = "true"
-    pygments = "auto"
-    compass = "auto"
+    highlight = 'pygments' // 'none', 'pygments'
+    markdown = 'txtmark'   // 'txtmark', 'pegdown'
 }
 
 environments {
     dev {
-        log.info "Development environment is used"
+        log.info 'Development environment is used'
         url = "http://localhost:${jetty_port}"
         show_unpublished = true
     }
     prod {
-        log.info "Production environment is used"
+        log.info 'Production environment is used'
         url = '' // the site URL, for instance http://example.com
         show_unpublished = false
         features {
@@ -36,19 +34,31 @@ environments {
     }
     cmd {
         features {
-            highlight = "none"
-            compass = "none"
+            highlight = 'none'
+            compass = 'none'
         }
     }
 }
 
+python {
+    //interpreter = 'auto' // 'auto', 'python', 'jython'
+    //cmd_candidates = ['python2', 'python', 'python2.7']
+    //setup_tools = '2.1'
+}
+
+ruby {
+    //interpreter = 'auto'   // 'auto', 'ruby', 'jruby'
+    //cmd_candidates = ['ruby', 'ruby1.8.7', 'ruby1.9.3', 'user.home/.rvm/bin/ruby']
+    //ruby_gems = '2.2.2'
+}
+
 // Deployment settings.
-s3_bucket = "www.example.com"
+s3_bucket = 'www.example.com'
 s3_deploy_cmd = "s3cmd sync --acl-public --reduced-redundancy ${destination_dir}/ s3://${s3_bucket}/"
 
-rsync_ssh_user = "user@example.com"
-rsync_ssh_port = "22"
-rsync_document_root = "~/public_html/"
+rsync_ssh_user = 'user@example.com'
+rsync_ssh_port = '22'
+rsync_document_root = '~/public_html/'
 rsync_deploy_cmd = "rsync -avze 'ssh -p ${rsync_ssh_port}' --delete ${destination_dir} ${rsync_ssh_user}:${rsync_document_root}"
 
 gh_pages_url = '' // path to GitHub repository in format git@github.com:{username}/{repo}.git
