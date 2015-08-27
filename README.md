@@ -1,3 +1,5 @@
+![Banner](https://raw.githubusercontent.com/sysgears/grain-theme-octopress/master/banner.jpg)
+
 Octopress Grain Theme
 =====================
 

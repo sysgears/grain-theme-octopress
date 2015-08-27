@@ -9,6 +9,7 @@ import com.sysgears.octopress.taglibs.OctopressTagLib
 // Resource mapper and tag libs.
 resource_mapper = new ResourceMapper(site).map
 tag_libs = [OctopressTagLib]
+non_script_files = [/(?i).*\.(js)$/]
 
 features {
     highlight = 'pygments' // 'none', 'pygments'
