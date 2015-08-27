@@ -9,6 +9,7 @@ import com.sysgears.octopress.taglibs.OctopressTagLib
 // Resource mapper and tag libs.
 resource_mapper = new ResourceMapper(site).map
 tag_libs = [OctopressTagLib]
+non_script_files = [/(?i).*\.(js)$/]
 
 features {
     highlight = 'pygments' // 'none', 'pygments'
@@ -41,13 +42,13 @@ environments {
 }
 
 python {
-    interpreter = 'jython' // 'auto', 'python', 'jython'
+    interpreter = 'python' // 'auto', 'python', 'jython'
     //cmd_candidates = ['python2', 'python', 'python2.7']
     //setup_tools = '2.1'
 }
 
 ruby {
-    interpreter = 'jruby'   // 'auto', 'ruby', 'jruby'
+    interpreter = 'ruby'   // 'auto', 'ruby', 'jruby'
     //cmd_candidates = ['ruby', 'ruby1.8.7', 'ruby1.9.3', 'user.home/.rvm/bin/ruby']
     //ruby_gems = '2.2.2'
 }
