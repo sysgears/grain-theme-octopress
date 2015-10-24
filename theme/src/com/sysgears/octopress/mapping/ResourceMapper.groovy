@@ -44,7 +44,7 @@ class ResourceMapper {
             resource
         }.sort { -it.date.time }
         
-        customizeModels << addSiteMenu << customizeAsides << refinedResources
+        checkForDuplicateUrls << customizeModels << addSiteMenu << customizeAsides << refinedResources
     }
 
     /**
@@ -193,6 +193,24 @@ class ResourceMapper {
                 page
             }
         }
+    }
+
+    /**
+     * Ensures all resources have unique URLs.
+     *
+     * @param resources to validate.
+     * @throw RuntimeException when a duplicate URL is found.
+     * @return the resources unchanged.
+     */
+    private def checkForDuplicateUrls = { List resources ->
+        def urls = [:]
+
+        resources.each { resource -> 
+            if(urls.containsKey(resource.url)) throw new RuntimeException("Encountered duplicate resource URL: $resource.url") 
+            else urls[resource.url] = null
+        }
+
+        resources
     }
 
     /**
