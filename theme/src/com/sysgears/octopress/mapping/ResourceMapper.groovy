@@ -203,11 +203,8 @@ class ResourceMapper {
      * @return the resources unchanged.
      */
     private def checkForDuplicateUrls = { List resources ->
-        def urls = [:]
-
-        resources.each { resource -> 
-            if(urls.containsKey(resource.url)) throw new RuntimeException("Encountered duplicate resource URL: $resource.url") 
-            else urls[resource.url] = null
+        resources.groupBy { it.url }.find { it.value.size() > 1 }?.value*.url?.unique()?.each {
+            throw new RuntimeException("Encountered duplicate resource URL: $it")
         }
 
         resources
