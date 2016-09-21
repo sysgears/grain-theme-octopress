@@ -20,6 +20,12 @@ class ResourceMapper {
      */
     private TweetsFetcher tweetsFetcher
 
+    /**
+     * The blog post URL base path. Change the value to customize.
+     * Defaults to /blog/
+     */
+    public String postUrlBasePath = '/blog/'
+
     public ResourceMapper(Site site) {
         this.site = site
         tweetsFetcher = new TweetsFetcher(site)
@@ -38,7 +44,22 @@ class ResourceMapper {
             resource
         }.sort { -it.date.time }
         
-        customizeModels << addSiteMenu << customizeAsides << refinedResources
+        checkForDuplicateUrls << customizeModels << addSiteMenu << customizeAsides << refinedResources
+    }
+
+    /**
+     * Creates URL for a post page relative to postUrlBasePath.
+     * Replace with your own implementation to customize.
+     * The default URL format is '{year}/{month}/{day}/{post name}'.
+     *
+     * @param resource the blog post resource 
+     *
+     * @return formatted url to the post page
+     */
+    def createPostUrl = { Map resource ->
+        def date = resource.date.format('yyyy/MM/dd/')
+        def title = resource.title.encodeAsSlug()
+        "$date$title/"
     }
 
     /**
@@ -72,7 +93,7 @@ class ResourceMapper {
                 update.url = getFingerprintUrl(resource)
                 break
             case ~/\/blog\/.*/:
-                update.url = getPostUrl('/blog/', resource)
+                update.url = getPostUrl(postUrlBasePath, resource)
                 break
         }
 
@@ -141,7 +162,7 @@ class ResourceMapper {
                         page + [url: feedUrl, tag: tag, posts: postsByCategory(tag).take(maxRss)]
                     }
                     break
-                case ~/\/blog\/.*/:
+                case { it.startsWith(postUrlBasePath) }:
                     def post = posts.find { it.url == page.url }
                     def index = posts.indexOf(post)
                     def prev = index > 0 ? posts[index - 1] : null
@@ -175,7 +196,23 @@ class ResourceMapper {
     }
 
     /**
-     * Creates URL for a post page. The URL format is '{base path}/{year}/{month}/{day}/{post name}'.
+     * Ensures all resources have unique URLs.
+     *
+     * @param resources to validate.
+     * @throw RuntimeException when a duplicate URL is found.
+     * @return the resources unchanged.
+     */
+    private def checkForDuplicateUrls = { List resources ->
+        resources.groupBy { it.url }.find { it.value.size() > 1 }?.value*.url?.unique()?.each {
+            throw new RuntimeException("Encountered duplicate resource URL: $it")
+        }
+
+        resources
+    }
+
+    /**
+     * Creates URL for a post page. Delegates to createPostUrl() to provide the URL format
+     * relative to the basePath.
      *
      * @param basePath base path to the page
      * @param location location of the file
@@ -183,9 +220,7 @@ class ResourceMapper {
      * @return formatted url to the post page
      */
     private String getPostUrl(String basePath, Map resource) {
-        def date = resource.date.format('yyyy/MM/dd/')
-        def title = resource.title.encodeAsSlug()
-        "$basePath$date$title/"
+        "$basePath${createPostUrl(resource)}"
     }
 
     /**
