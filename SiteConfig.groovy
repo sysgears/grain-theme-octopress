@@ -42,13 +42,13 @@ environments {
 }
 
 python {
-    interpreter = 'python' // 'auto', 'python', 'jython'
+    interpreter = 'jython' // 'auto', 'python', 'jython'
     //cmd_candidates = ['python2', 'python', 'python2.7']
     //setup_tools = '2.1'
 }
 
 ruby {
-    interpreter = 'ruby'   // 'auto', 'ruby', 'jruby'
+    interpreter = 'jruby'   // 'auto', 'ruby', 'jruby'
     //cmd_candidates = ['ruby', 'ruby1.8.7', 'ruby1.9.3', 'user.home/.rvm/bin/ruby']
     //ruby_gems = '2.2.2'
 }
