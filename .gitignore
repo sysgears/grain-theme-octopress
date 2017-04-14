@@ -2,6 +2,7 @@
 *.iml
 .DS_Store
 .cache
+.sass-cache
 .gradle
 .nb-gradle
 .classpath
