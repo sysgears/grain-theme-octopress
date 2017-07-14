@@ -3,6 +3,8 @@
 Octopress Grain Theme
 =====================
 
+[![Twitter Follow](https://img.shields.io/twitter/follow/sysgears.svg?style=social)](https://twitter.com/sysgears)
+
 This is a port of Octopress blogging theme for Grain framework.
 
 Features
